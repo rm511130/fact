@@ -1,5 +1,6 @@
 # fact
 Factorial Program in GO language
+
 You'll need to install the GO Language on your Mac
 
 https://golang.org/doc/install
