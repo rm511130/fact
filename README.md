@@ -1,6 +1,9 @@
 # fact
 Factorial Program in GO language
-You'll need to install the GO Language on your Mac:  https://golang.org/doc/install
+You'll need to install the GO Language on your Mac
+
+https://golang.org/doc/install
+
 Open a terminal window on your Mac and execute the following command:
 
 $ go run fact.go
