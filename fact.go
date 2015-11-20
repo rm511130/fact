@@ -10,6 +10,6 @@ func main() { m := martini.Classic()
                                                                 fmt.Sprintf("%s %d\n",err,s);
                                                                 return "Calculating Factorials: " + params["_1"] + "! = " + fmt.Sprintf("%d\n", fact(uint64(s)))
                                                               })
-              m.Get("/", func() string { return "Try passing an integer! Try localhost:3000/5" })
+              // m.Get("/", func() string { return "Try passing an integer! Try localhost:3000/5" })
               m.Run()
             }
