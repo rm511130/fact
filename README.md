@@ -10,10 +10,10 @@ Start with option (a) to make sure you download the program from github
   
 # (a) fact on Mac OS  
   
-Prerequisite: You'll need to install the GO Language on your Mac.  
-Do you already have GO installed? Try `Mac $ go version`   
-You should see something like this:   `go version go1.14 darwin/amd64` 
-If you need to install the GO Language, do this: `Mac $ brew install go` 
+- Prerequisite: You'll need to install the GO Language on your Mac.  
+- Do you already have GO installed? Try `Mac $ go version`   
+- You should see something like this:   `go version go1.14 darwin/amd64` 
+- If you need to install the GO Language, do this: `Mac $ brew install go` 
   
 Open a terminal window on your Mac and execute the following command:  
 
@@ -24,29 +24,29 @@ Mac $ cd /work/fact
 Mac $ go run fact.go  
 ```
   
-You should see a message like this one:  `2020/03/02 16:19:05 Starting Factorial Application...`
-You can then test it using a browser:    `http://localhost:3000/5`
-And you'll get as a reply:               `Calculating Factorials: 5! = 120` 
+- You should see a message like this one:  `2020/03/02 16:19:05 Starting Factorial Application...`
+- You can then test it using a browser:    `http://localhost:3000/5`
+- And you'll get as a reply:               `Calculating Factorials: 5! = 120` 
   
 # (b) fact using Docker on Mac OS  
   
-Prerequisite: You'll need to install Docker on your Mac.  
-Do you already have Docker installed? Try $ docker version  
-You should see both client and server version information: I see version 1.9.0 for both client and server.  
-To install Docker on your Mac OS follow the instructions: https://docs.docker.com/engine/installation/mac/  
-To run the Docker Server within VirtualBox on your Mac, perform a Mac Spotlight Search for "Docker Quickstart Terminal" and run it.  
+- Prerequisite: You'll need to install Docker on your Mac.  
+- Do you already have Docker installed? Try `Mac $ docker version`  
+- You should see both client and server version information, e.g.: `version 19.03.5 for both client and server.`  
+- To install Docker on your Mac OS follow the instructions: https://docs.docker.com/engine/installation/mac/  
+- To run the Docker Server on your Mac, perform a Mac Spotlight Search for "Docker" and run it.  
   
-On an open terminal window with the familiar Docker Whale displayed on your Mac, execute the following command:  
+On an open terminal window with the familiar Docker Whale icon displayed somewhere at the top of the screen of your Mac, execute the following command:  
   
-$ cd /work/fact  
-$ docker build -t fact .  
-$ docker-machine ip default  
-192.168.99.100  
-$ docker run --publish 6060:3000 --name fact --rm fact  
-  
-You should see a message like this one:  + exec /go/bin/fact  [martini] listening on :3000 (development)  
-You can now test it:         http://192.168.99.100:6060/5  
-And you'll get as a reply:   Calculating Factorials: 5! = 120  
+```
+Mac $ cd /work/fact  
+Mac $ docker build -t fact .  
+Mac $ docker run --publish 6060:3000 --name fact --rm fact  
+```
+
+- You should see a message like this one: `2020/03/02 21:39:23 Starting Factorial Application...`
+- You can now test it using a browser:    `http://localhost:6060/35` 
+- And you'll get as a reply:              `Calculating Factorial: 35! = 10333147966386144929666651337523200000000`
   
 # (c) fact on Pivotal Cloud Foundry  
   
