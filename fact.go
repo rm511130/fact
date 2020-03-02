@@ -12,9 +12,7 @@ import (
         "math/big"
 )
 
-const (
-	version = "v1.0.0"
-)
+const ( version = "v1.0.0" )
 
 func headers(w http.ResponseWriter, req *http.Request) {
     for name, headers := range req.Header {
@@ -45,10 +43,16 @@ func main() {
 	})
 
 	http.HandleFunc("/version", func(w http.ResponseWriter, r *http.Request) { fmt.Fprintf(w, version) })
-         http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) { w.WriteHeader(200) })
-         http.HandleFunc("/header", headers )
+        http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) { w.WriteHeader(200) })
+        http.HandleFunc("/header", headers )
 
-	s := http.Server{Addr: ":3000"}
+	var port string
+	if port = os.Getenv("PORT"); len(port) == 0 {
+		port = "3000"
+	}
+	log.Fatal(http.ListenAndServe(":"+port, nil))
+
+	s := http.Server{Addr: ":" + port }
 
 	go func() { log.Fatal(s.ListenAndServe()) }()
 
