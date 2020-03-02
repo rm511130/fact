@@ -21,11 +21,9 @@ Open a terminal window on your Mac and execute the following command:
 $ cd /work  
 $ git clone https://github.com/rm511130/fact  
 $ cd /work/fact  
-$ ls -a  
-.		..		.git		Dockerfile	Godeps		Procfile	README.md	fact.go  
 $ go run fact.go  
   
-You should see a message like this one:  [martini] listening on :3000 (development)  
+You should see a message like this one:  2020/03/02 16:19:05 Starting Factorial Application...
 You can then test it:        http://localhost:3000/5  
 And you'll get as a reply:   Calculating Factorials: 5! = 120  
   
