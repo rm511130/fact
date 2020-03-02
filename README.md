@@ -39,7 +39,9 @@ Mac $ go run fact.go
 On an open terminal window with the familiar Docker Whale icon displayed somewhere at the top of the screen of your Mac, execute the following command:  
   
 ```
-Mac $ cd /work/fact  
+Mac $ cd /work
+Mac $ git clone https://github.com/rm511130/fact 
+Mac $ cd /work/fact
 Mac $ docker build -t fact .  
 Mac $ docker run --publish 6060:3000 --name fact --rm fact  
 ```
@@ -50,7 +52,7 @@ Mac $ docker run --publish 6060:3000 --name fact --rm fact
   
 # (c) fact on Pivotal Cloud Foundry  
   
-Prerequisite: You'll need to install Godep on your Mac  
+- Prerequisite: You'll Go on your Mac  
 Do you already have Godep installed? Try $ godep version  
 You should see something like this:        godep v29 (darwin/amd64/go1.6.2)  
 To install Godep on your Mac, do this:   $ go get github.com/tools/godep  
