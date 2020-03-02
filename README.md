@@ -11,21 +11,22 @@ Start with option (a) to make sure you download the program from github
 # (a) fact on Mac OS  
   
 Prerequisite: You'll need to install the GO Language on your Mac.  
-Do you already have GO installed? Try $ go version  
-You should see something like this:     go version go1.6.2 darwin/amd64  
-If you need to install the GO Language, do this: $ brew install go  
-And we're using a web server called martini, so: $ go get github.com/go-martini/martini  
+Do you already have GO installed? Try `Mac $ go version`  
+You should see something like this:   `Mac $ go version go1.12.7 darwin/amd64`
+If you need to install the GO Language, do this: `Mac $ brew install go`
   
 Open a terminal window on your Mac and execute the following command:  
+
+```
+Mac $ cd /work  
+Mac $ git clone https://github.com/rm511130/fact  
+Mac $ cd /work/fact  
+Mac $ go run fact.go  
+```
   
-$ cd /work  
-$ git clone https://github.com/rm511130/fact  
-$ cd /work/fact  
-$ go run fact.go  
-  
-You should see a message like this one:  2020/03/02 16:19:05 Starting Factorial Application...
-You can then test it:        http://localhost:3000/5  
-And you'll get as a reply:   Calculating Factorials: 5! = 120  
+You should see a message like this one:  `2020/03/02 16:19:05 Starting Factorial Application...`
+You can then test it using a browser:    `http://localhost:3000/5`
+And you'll get as a reply:               `Calculating Factorials: 5! = 120` 
   
 # (b) fact using Docker on Mac OS  
   
