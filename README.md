@@ -11,9 +11,9 @@ Start with option (a) to make sure you download the program from github
 # (a) fact on Mac OS  
   
 Prerequisite: You'll need to install the GO Language on your Mac.  
-Do you already have GO installed? Try `Mac $ go version`  
-You should see something like this:   `Mac $ go version go1.12.7 darwin/amd64`
-If you need to install the GO Language, do this: `Mac $ brew install go`
+Do you already have GO installed? Try `Mac $ go version`   
+You should see something like this:   `go version go1.14 darwin/amd64` 
+If you need to install the GO Language, do this: `Mac $ brew install go` 
   
 Open a terminal window on your Mac and execute the following command:  
 
