@@ -141,7 +141,7 @@ vm-6b355629-2699-4839-6ade-8235603c3110   Ready    <none>   9h    v1.15.5   10.0
 ```
 
 - What do we know about the rmeira/fact docker image?
-   - It's running on a K8s Pod that is housed inside the vm-6b355629-2699-4839-6ade-8235603c3110 K8s Worker Node 
+   - It's running on a K8s Pod housed inside the vm-6b355629-2699-4839-6ade-8235603c3110 K8s Worker Node 
    - The vm-6b355629-2699-4839-6ade-8235603c3110 VM is located at 10.0.11.11
    - Port 31949 on the Worker Node is mapped to the Factorial Service at 10.100.200.77 on port 80
    - The Factorial NodePort Service is mapped to port 3000 of the Pod running the rmeira/factorial docker image
