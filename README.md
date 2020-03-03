@@ -147,10 +147,10 @@ vm-6b355629-2699-4839-6ade-8235603c3110   Ready    <none>   9h    v1.15.5   10.0
    - The Factorial NodePort Service is mapped to port 3000 of the Pod running the rmeira/factorial docker image
    - The Pod running the rmeira/factorial docker image is at location 10.200.45.15
 
-- Assuming you have access to the 10.0.11.0/26 Network, you can now test the Factorial program:
+- Assuming you have access to the 10.0.11.0/24 Network, you can now test the Factorial program:
 
 ```
-VM@10.0.0.10:~$ curl http://10.0.11.11:31949/40; echo
+VM@10.0.11.10:~$ curl http://10.0.11.11:31949/40; echo
 Calculating Factorial: 40! = 815915283247897734345611269596115894272000000000
 ```
    
