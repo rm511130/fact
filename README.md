@@ -1,14 +1,15 @@
-# fact
+# Fact.go
 Factorial Program in GO language that can be executed:  
   
-(a) on your Mac OS  
-(b) on a Docker container on Mac OS  
-(c) on Pivotal Cloud Foundry  
+(a) on your Mac OS
+(b) in a Docker container on a Mac OS  
+(c) on Pivotal Cloud Foundry using the Go Buildpack
 (d) on Pivotal Cloud Foundry using a Docker Image  
+(e) on a K8s environment using a Docker Image
   
 Start with option (a) to make sure you download the program from github  
   
-# (a) fact on Mac OS  
+# (a) Fact.go on Mac OS  
   
 - Prerequisite: You'll need to install the GO Language on your Mac.  
 - Do you already have GO installed? Try `Mac $ go version`   
@@ -28,7 +29,7 @@ Mac $ go run fact.go
 - You can then test it using a browser:    `http://localhost:3000/5`
 - And you'll get as a reply:               `Calculating Factorials: 5! = 120` 
   
-# (b) fact using Docker on Mac OS  
+# (b) Fact.go using Docker on Mac OS  
   
 - Prerequisite: You'll need to install Docker on your Mac.  
 - Do you already have Docker installed? Try `Mac $ docker version`  
@@ -52,7 +53,7 @@ Mac $ docker run --publish 3000:3000 --name fact --rm fact
 
 I also uploaded the Docker Image to the Docker Hub:  https://hub.docker.com/r/rmeira/fact
   
-# (c) fact on Pivotal Cloud Foundry  
+# (c) Fact.go on Pivotal Cloud Foundry using the Go Buildpack
   
 - Prerequisite: You need the CF CLI on your Mac  
 - And you need to be pointing at a valid CF API, e.g.: `cf api api.run.pivotal.io`
@@ -73,12 +74,12 @@ Mac $ cf push fact -b go_buildpack
   - http://fact.cfapps.io/health
   - http://fact.cfapps.io/version
 
-# (d) fact on Pivotal Cloud Foundry using a Docker Image
+# (d) Fact.go on Pivotal Cloud Foundry using a Docker Image
   
 - Prerequisite: You need the CF CLI on your Mac  
 - And you need to be pointing at a valid CF API, e.g.: `cf api api.run.pivotal.io`
   
-Open a terminal window on your Mac and execute the following command:  
+Open a terminal window on your Mac and execute the following commands:  
   
 ```  
 Mac $ cf delete fact    # in case executed the step (c) described above
@@ -90,7 +91,72 @@ Mac $ cf push fact --docker-image rmeira/fact
   - http://fact.cfapps.io/header  
   - http://fact.cfapps.io/health
   - http://fact.cfapps.io/version
+  
+# (e) Fact.go on a K8s Cluster using a Docker Image
 
+- Prerequisite: The kubectl CLI on your Mac and access to a K8s Cluster 
+- In my case, the K8s Cluster is called `my-cluster`
+
+Open a terminal window on your Mac and execute the following commands: 
+
+```
+Mac $ kubectl config use-context my-cluster
+Switched to context "my-cluster".
+```
+```
+Mac $ kubectl run --generator=run-pod/v1 factorial --image=rmeira/fact
+pod/factorial created
+```
+Let's open a bash shell to access the factorial pod
+
+```
+Mac $ kubectl exec -t -i factorial bash
+```
+
+We can now test our factorial program:
+```
+root@factorial:/go/src/app# curl 127.0.0.1:3000/40; echo
+Calculating Factorial: 40! = 815915283247897734345611269596115894272000000000
+```
+
+If we wish to give access to an external user, we'll need to expose the Factorial Pod appropriately:
+
+```
+Mac $ kubectl expose pod factorial --type=NodePort --port=80 --target-port=3000
+service/factorial exposed
+```
+```
+kubectl get pods -o wide
+NAME        READY   STATUS    RESTARTS   AGE   IP             NODE                                      NOMINATED NODE   READINESS GATES
+factorial   1/1     Running   0          11m   10.200.45.15   vm-6b355629-2699-4839-6ade-8235603c3110   <none>           <none>
+```
+```
+Mac $ kubectl get services     
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+factorial    NodePort    10.100.200.77   <none>        80:31949/TCP   58s
+kubernetes   ClusterIP   10.100.200.1    <none>        443/TCP        9h
+```
+```
+Mac $ kubectl get nodes -o wide
+NAME                                      STATUS   ROLES    AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
+vm-6b355629-2699-4839-6ade-8235603c3110   Ready    <none>   9h    v1.15.5   10.0.11.11                  Ubuntu 16.04.6 LTS   4.15.0-66-generic   docker://18.9.9
+```
+
+- What do we know about the rmeira/fact docker image?
+   - It's running on a K8s Pod that is housed inside the vm-6b355629-2699-4839-6ade-8235603c3110 K8s Worker Node 
+   - The vm-6b355629-2699-4839-6ade-8235603c3110 VM is located at 10.0.11.11
+   - Port 31949 on the Worker Node is mapped to the Factorial Service at 10.100.200.77 on port 80
+   - The Factorial NodePort Service is mapped to port 3000 of the Pod running the rmeira/factorial docker image
+   - The Pod running the rmeira/factorial docker image is at location 10.200.45.15
+
+- Assuming you have access to the 10.0.11.0/26 Network, you can now test the Factorial program:
+
+```
+VM@10.0.0.10:~$ curl http://10.0.11.11:31949/40; echo
+Calculating Factorial: 40! = 815915283247897734345611269596115894272000000000
+```
+   
+   
 
 
 
