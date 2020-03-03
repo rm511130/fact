@@ -49,6 +49,8 @@ Mac $ docker run --publish 3000:3000 --name fact --rm fact
 - You should see a message like this one: `2020/03/02 21:39:23 Starting Factorial Application...`
 - You can now test it using a browser:    `http://localhost:3000/35` 
 - And you'll get as a reply:              `Calculating Factorial: 35! = 10333147966386144929666651337523200000000`
+
+I also uploaded the Docker Image to the Docker Hub:  https://hub.docker.com/r/rmeira/fact
   
 # (c) fact on Pivotal Cloud Foundry  
   
@@ -71,7 +73,23 @@ Mac $ cf push fact -b go_buildpack
   - http://fact.cfapps.io/health
   - http://fact.cfapps.io/version
 
-
+# (d) fact on Pivotal Cloud Foundry using a Docker Image
+  
+- Prerequisite: You need the CF CLI on your Mac  
+- And you need to be pointing at a valid CF API, e.g.: `cf api api.run.pivotal.io`
+  
+Open a terminal window on your Mac and execute the following command:  
+  
+```  
+Mac $ cf delete fact    # in case executed the step (c) described above
+Mac $ cf push fact --docker-image rmeira/fact
+```
+  
+- Once the `cf push` has completed, you can test the factorial program by trying the following URLs:         
+  - http://fact.cfapps.io/600  
+  - http://fact.cfapps.io/header  
+  - http://fact.cfapps.io/health
+  - http://fact.cfapps.io/version
 
 
 
