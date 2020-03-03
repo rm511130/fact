@@ -43,32 +43,34 @@ Mac $ cd /work
 Mac $ git clone https://github.com/rm511130/fact 
 Mac $ cd /work/fact
 Mac $ docker build -t fact .  
-Mac $ docker run --publish 6060:3000 --name fact --rm fact  
+Mac $ docker run --publish 3000:3000 --name fact --rm fact  
 ```
 
 - You should see a message like this one: `2020/03/02 21:39:23 Starting Factorial Application...`
-- You can now test it using a browser:    `http://localhost:6060/35` 
+- You can now test it using a browser:    `http://localhost:3000/35` 
 - And you'll get as a reply:              `Calculating Factorial: 35! = 10333147966386144929666651337523200000000`
   
 # (c) fact on Pivotal Cloud Foundry  
   
-- Prerequisite: You'll Go on your Mac  
-Do you already have Godep installed? Try $ godep version  
-You should see something like this:        godep v29 (darwin/amd64/go1.6.2)  
-To install Godep on your Mac, do this:   $ go get github.com/tools/godep  
+- Prerequisite: You need the CF CLI on your Mac  
+- And you need to be pointing at a valid CF API, e.g.: `cf api api.run.pivotal.io`
   
 Open a terminal window on your Mac and execute the following command:  
   
-$ cd /work/fact  
-$ godeps save  
-$ ls -a  
-.		..		.git		Dockerfile	Godeps		Procfile	README.md	fact.go  
-$ cf push fact -b https://github.com/cloudfoundry/go-buildpack  
+```  
+Mac $ cd /work
+Mac $ git clone https://github.com/rm511130/fact 
+Mac $ cd /work/fact
+Mac $ cf push fact -b go_buildpack
+```
   
-You should see the usual creating app, route, binding, uploading ... and: urls: fact.cfapps.io  
-You can now test it:         http://fact.cfapps.io/6  
-And you'll get as a reply:   Calculating Factorials: 6! = 720  
-  
+- You should see the usual creating app, route, binding, uploading ... and: urls: fact.cfapps.io  
+- You can now test it by trying the following URLs:         
+  - http://fact.cfapps.io/600  
+  - http://fact.cfapps.io/header  
+  - http://fact.cfapps.io/health
+  - http://fact.cfapps.io/version
+
 
 
 
