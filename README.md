@@ -107,15 +107,13 @@ Switched to context "my-cluster".
 Mac $ kubectl run --generator=run-pod/v1 factorial --image=rmeira/fact
 pod/factorial created
 ```
-Let's open a bash shell to access the factorial pod
+Let's open a bash shell to access the Pod running the rmeira/fact image and test the Factorial program:
 
 ```
 Mac $ kubectl exec -t -i factorial bash
-```
 
-We can now test our factorial program:
-```
 root@factorial:/go/src/app# curl 127.0.0.1:3000/40; echo
+
 Calculating Factorial: 40! = 815915283247897734345611269596115894272000000000
 ```
 
