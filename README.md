@@ -48,10 +48,20 @@ Mac $ docker run --publish 3000:3000 --name fact --rm fact
 ```
 
 - You should see a message like this one: `2020/03/02 21:39:23 Starting Factorial Application...`
+                                          `2020/03/10 20:19:11 Using port3000`
+                                          
 - You can now test it using a browser:    `http://localhost:3000/35` 
 - And you'll get as a reply:              `Calculating Factorial: 35! = 10333147966386144929666651337523200000000`
 
-I also uploaded the Docker Image to the Docker Hub:  https://hub.docker.com/r/rmeira/fact
+It's also possible to run fact by referencing the image stored in Docker Hub:  https://hub.docker.com/r/rmeira/fact
+
+```
+Mac $ docker run -d --rm -p 3000:3000 rmeira/fact
+
+Mac $ curl 127.0.0.1:3000/150  
+
+Calculating Factorial: 150! = 57133839564458545904789328652610540031895535786011264182548375833179829124845398393126574488675311145377107878746854204162666250198684504466355949195922066574942592095735778929325357290444962472405416790722118445437122269675520000000000000000000000000000000000000
+```
   
 # (c) Fact.go on Pivotal Cloud Foundry using the Go Buildpack
   
@@ -92,7 +102,7 @@ Mac $ cf push fact --docker-image rmeira/fact
   - http://fact.cfapps.io/health
   - http://fact.cfapps.io/version
   
-# (e) Fact.go on a K8s Cluster using a Docker Image
+# (e) Fact.go on a K8s Cluster using the same Docker Image
 
 - Prerequisite: The kubectl CLI on your Mac and access to a K8s Cluster 
 - In my case, the K8s Cluster is called `my-cluster`
@@ -113,8 +123,9 @@ Let's open a bash shell to access the Pod running the rmeira/fact image and test
 Mac $ kubectl exec -t -i factorial bash
 
 root@factorial:/go/src/app# curl 127.0.0.1:3000/40; echo
-
 Calculating Factorial: 40! = 815915283247897734345611269596115894272000000000
+root@factorial:/go/src/app# exit
+exit
 ```
 
 If we wish to give access to an external user, we'll need to expose the Factorial Pod appropriately:
