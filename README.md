@@ -165,8 +165,19 @@ VM@10.0.11.10:~$ curl http://10.0.11.11:31949/40; echo
 Calculating Factorial: 40! = 815915283247897734345611269596115894272000000000
 ```
    
-   
+# Additional Notes
 
+You can update the `Dockerfile` once you have cloned this repo to reflect the `:latest` software versions:
+
+```
+FROM golang:latest
+RUN mkdir /app
+ADD . /app/
+WORKDIR /app
+EXPOSE 3000
+RUN go build -o main .
+CMD ["/app/main"]
+```
 
 
 
